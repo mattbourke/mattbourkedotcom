@@ -1,4 +1,4 @@
 # mattbourkedotcom
-This is the code for Mattbourke.com
+This is the code for mattbourke.com
 # license
-I own images, anyone can have the code.
+Feel free to use the code on an as is basis for whatever, however any photos in the repo are my own, unless stated otherwise.
