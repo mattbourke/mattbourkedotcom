@@ -1,0 +1,7 @@
+[
+    {"page":"Home",    "content":"Hi, I'm Matt, welcome to my site. Here you can find out a little about me and what I've been up to. If you have any questions about myself or this website feel free to contact me via the 'Contact' page." },
+    {"page":"About",   "content":"Aussie Software developer living in Australia, I've recently returned from 10 years abroad."                 },
+    {"page":"Talks",   "content":"I've done two technical talks at a user group in Liverpool and one talk at a conference in Germany"          },
+    {"page":"Games",   "content":"I've made one experimental Javascript game so far, but would like to make a solid PhaserJS game soon."                },
+    {"page":"Contact", "content":"Contact me via twitter, @gummatt"         }
+]

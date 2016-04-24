@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Javascript 6</title>
+
+		<meta name="description" content="A Javascript 6 presentation">
+		<!-- <meta name="author" content="Hakim El Hattab">
+		the reveal code is the above Author, content is the below
+		-->
+		<meta name="author" content="Matt Bourke">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=6.0, user-scalable=yes">
+
+		<!-- <link rel="stylesheet" href="css/reveal.min.css"> -->
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>ECMAScript 6</h1>
+					<h3>The next Javascript, ECMAScript 6 for those still using 3.1 and awaiting 4.0</h3>
+					<p>
+						<small>Presented At <a href="http://www.cfcamp.org">CFCAMP 2014</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h3>About the presenter</h3>
+					<ul>
+						<li>Software developer for 14 years</li>
+						<li>Born in Australia / Lived in the UK 8.5 years</li>
+						<li>On Friday I became a dual citizen</li>
+						<li>Likes Javascript</li>
+						<li>Isn't sure about Javascript, but loves what it can do</li>
+					</ul>
+
+					<p>
+						<small>Presented by <a href="http://www.mattbourke.com">Matt Bourke</a> / <a href="http://twitter.com/gummatt">@gummatt</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Why I've gotten into JS</h3>
+					<ul>
+						<li>Ironically it's the new Java, write once, run everywhere</li>
+						<li>It's on over 3 billion devices</li>
+						<li>Everyone is using it</li>
+						<li>Creating awesome games is easy, check out Phaser.js</li>
+						<li>Automated regression testing with casper.js</li>
+						<li>Javascript is the assembly language of the web</li>
+						<li>Whether you like the above or not, it's true.</li>
+					</ul>
+
+				</section>
+
+
+				<section>
+					<h3>Software versioning</h3>
+					<ul>
+						<li>Java 1.0 1.1 1.2 1.3 1.4 <del>1.5</del> 5.0 6.0 7.0 8.0</li>
+						<li>Chrome Monday 1.0 tuesday 2.0 wednesday 3.0 Thursday 4.0 (not quite)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>ECMAScript 6?</h3>
+					<ul>
+						<li>1.0 , 2.0 , 3.0 , <del>3.1</del> , <del>4.0</del> , 5.0 , 6.0</li>
+						<li>3.1 roughly became 5.0</li>
+						<li>4.0 scrapped and some of it became 6.0</li>
+						<li>7.0 will be riding the yearly software release train.</li>
+					</ul>
+				</section>
+
+				<section>
+					<p>"After all these years I still look at Javascript with great uncertainty" - Albert Einstein</p>
+				</section>
+
+
+				<section>
+					<h2>The usual for and against</h2>
+					<p>JS doesn't have classes - "It's prototype based!"</p>
+					<p>ES 6 will have classes  - "Awesome!"</p>
+					<p>So currently it really isn't that good?</p>
+				</section>
+
+				<section>
+					<h2>When can we use this new exciting JS?</h2>
+					<p>This really depends on your audience, and how much polyfilling or Transpiling you'd like to do.</p>
+				</section>
+
+				<section>
+					<h2>Ways to use ECMAScript 6 right now!</h2>
+					<ul>
+						<li>Polyfill by prototype extension</li>
+						<li>Transpile with tools like Traceur or Mascara</li>
+						<li>Use the latest versions of Chrome / Firefox</li>
+						<li>Enable "experimental Javascript" in Chrome URL Chrome://flags</li>
+						<li>Check out your browser compatibility here http://kangax.github.io/compat-table/es6/</li>
+						<li>http://www.es6fiddle.com/</li>
+						<li>https://github.com/paulmillr/es6-shim (roughly IE9)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Question 1</h2>
+					<pre><code data-trim contenteditable javascript>
+var num = 56;
+function function1() {
+  console.log(num);
+}
+  function1();
+
+num = 56;
+function function2(){
+    console.log(num); // undefined
+    var num = 10;
+    console.log(num);
+}
+  function2();
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>Var Scope? Let it be</h2>
+					<pre><code data-trim contenteditable javascript>
+var num = 56;
+
+function function1() {
+    var num = 4;
+    if( 1 === 1){
+        let num = 6;
+    }
+    console.log(num)
+}
+
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>Const</h2>
+					<pre><code data-trim contenteditable javascript>
+const num = 56;
+// below will fail silently
+num       = 20;
+// below will print 56
+console.log(num);
+// the below 2 will throw an error
+const num = 20;
+var num   = 20;
+
+if( num === 56 ){
+  let num = 5;
+  // the below prints 5
+  console.log(num);
+}
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>The Module Pattern</h2>
+					<pre><code data-trim contenteditable javascript>
+var person = {
+
+  name: "john",
+  lastName: "smith",
+
+  age : function(){
+     return 5;
+  },
+
+  fullName : function(){
+    return this.name +' '+ this.lastName;
+  }
+
+};
+
+console.info(person.age());
+console.info(person.fullName());
+					</code></pre>
+				</section>
+
+				<section>
+					<pre><code data-trim contenteditable javascript>
+// The revealing module pattern
+var person = (function(){
+  name = 'Matt';
+  age  = 5;
+
+  var getName = function(){
+    return this.name;
+  }
+
+  var getAgePlus = function(addValue){
+    var age      = getAge();
+    return age + addValue;
+  }
+
+  var getAge = function(){
+    return this.age;
+  }
+
+  return{
+    getAgePlus : getAgePlus,
+    getName    : getName
+  }
+})();
+console.log(person.getAgePlus(6));
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Require JS / AMD etc etc</h2>
+					<pre><code data-trim contenteditable javascript>
+//----- lib.js
+var getMatt = function(){
+    console.log("I'm here");
+};
+module.exports = {
+    getMatt : getMatt
+};
+
+//------ main.js
+require(lib);
+lib.getMatt();
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Functions - default arguments</h2>
+					<pre><code data-trim contenteditable javascript>
+function multiply(a, b = 2) {
+  return a*b;
+}
+
+multiply(5); // 10
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Functions - Named Parameters</h2>
+					<pre><code data-trim contenteditable javascript>
+function function1(a, {b, c}) {
+  return [b,c];
+}
+
+function1(1, {b:'hello', c:'world'});
+// ['hello','world']
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Functions - Spread or apply?</h2>
+					<pre><code data-trim contenteditable javascript>
+function example(a, b, c) {
+    console.log(a, b, c); // 1, 2, 3
+}
+var args = [1, 2, 3];
+example(...args);
+					</code></pre>
+				</section>
+			<section>
+					<h2>Functions - Spread example 2</h2>
+					<pre><code data-trim contenteditable javascript>
+crap = function(valueOne, ...rest){
+  console.log(rest.length); // I log 2
+  console.log(rest);        // I log valueTwo valueThree
+}
+crap('valueOne', 'valueTwo', 'valueThree');
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Functions, fat is PHAT!</h2>
+					<pre><code data-trim contenteditable javascript>
+// arrow functions, fat functions etc
+var reflect = valueIn => valueReturned;
+
+// effectively equivalent to:
+
+var reflect = function(valueIn) {
+    return valueReturned;
+};
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Object literals shorthand</h2>
+					<pre><code data-trim contenteditable javascript>
+// Old
+function createPerson(name, age) {
+  return { size: 'Huge', name: name, age: age };
+}
+function createCar(type) {
+  return { wheels: 4, type: type };
+}
+// New
+function createPerson(name, age) {
+  return { size: 'huge', name, age };
+}
+function createCar(name) {
+  return { wheels: 4, name };
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Strings, *Some* new bits</h2>
+					<pre><code data-trim contenteditable javascript>
+'test'.contains('te');   // true
+'test'.startsWith('te'); // true
+'test'.endswith('est');  // true
+'test'.repeat(3);        // testtesttest
+					</code></pre>
+				</section>
+
+
+				<section>
+					<h2>Arrays, *Some* new bits</h2>
+					<pre><code data-trim contenteditable javascript>
+// static array methods
+Array.find();
+Array.findindex();
+Array.from();
+Array.of();
+// prototype methods
+Array.prototype.entries();
+Array.prototype.keys();
+Array.prototype.values();
+Array.prototype.fill();
+
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Array.from converting "array like" objects to an Array</h2>
+					<pre><code data-trim contenteditable javascript>
+let list = document.querySelectorAll('ul.items li');
+    Array.from(lis).forEach(function (li) {
+        console.log(li);
+    });
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Modules, now built in</h2>
+					<i>"But we already have a dozen different ways of doing modules...."</i>
+					<br />
+					<br />
+					<ul>
+						<li>A standard module pattern helps prevent fragmentation of the language.</li>
+						<li>A single standard everyone can recognise and use.</li>
+						<li>Native to the language will be much faster due to static functions.</li>
+						<li>A single standard everyone can recognise and use.</li>
+						<li>A standard module pattern helps prevent fragmentation of the language.</li>
+					</ul>
+				</section>
+
+				<section>
+					<pre><code data-trim contenteditable javascript>
+// lib/people
+export function getFullName(firstName, lastName){
+    return firstName +' '+ lastName;
+};
+
+// root - main.js
+import {getFullName} from 'lib/people';
+let fullName = getFullName('Matt', 'Bourke');
+console.log(fullName);
+// Matt Bourke
+                    </code></pre>
+				</section>
+
+				<section>
+					<pre><code data-trim contenteditable javascript>
+// lib/people
+export function getFullName(firstName, lastName){
+    return firstName +' '+ lastName;
+}
+export const species = 'Human';
+
+// root - main.js
+import * as person from 'lib/people';
+let species = person.species;
+console.log(species);
+// Human
+                    </code></pre>
+				</section>
+
+				<section>
+					<h2>Javascript welcomes Classes</h2>
+					<pre><code data-trim contenteditable javascript>
+class Person extends ParentClass {
+    constructor(name) {
+        super(name); //calls the parentClass Constructor
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
+    }
+}
+let human = new Person('Matt');
+let name  = Person.getName();
+                    </code></pre>
+				</section>
+
+				<section>
+				<p>Some people say it was Java Developers who pushed for classes in JavaScript so they wouldn't have to learn JavaScript</p>
+				<br />
+<p><i>"Those people will go to their graves never knowing how miserable they are" - Douglas Crockford</i></p>
+				</section>
+
+
+				<section>
+					<h2>Javascript templating!.. the old way</h2>
+					<pre><code class="data-trim contenteditable javascript">
+var person = { name: "Matt Bourke",
+               age : 19
+};
+var templateString = "My name is " + person.name;
+templateString    += " and I'm" + person.age + " years old";
+console.log(templateString);
+// My name is Matt Bourke and I'm 19 years old
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Javascript templating!.. improved</h2>
+					<pre><code class="data-trim contenteditable javascript">
+let person = {name: 'Matt Bourke', age:19};
+
+let templateString = `My name is ${person.name}
+and I am ${person.age} years old`;
+
+console.log(templateString);
+// My name is Matt Bourke and I am 19 years old
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Javascript do you promise to promise</h2>
+<p>Promises are a software abstraction that makes working with asynchronous operations much more pleasant.</p>
+<ul>
+	<li>The proposed solution to JS CallBack hell (nested call backs).</li>
+	<li>Currently already hacked into many frameworks</li>
+	<li>Now native to Javascript</li>
+</ul>
+Promises .resolve .cast .race .all .then .catch
+				</section>
+
+				<section>
+					<h2>Generators</h2>
+					<p>Javascript function that can be yielded, a pausable/iterable function</p>
+					<pre><code data-trim contenteditable javascript>
+var generator = function*(){
+	var one   = yield 1;
+	var two   = yield 2;
+	var three = yield 3;
+	console.log(one, two, three);
+};
+var gen = generator(); //initiate generator
+console.log(gen.next()); //{value:1,         done:false}
+console.log(gen.next()); //{value:2,         done:false}
+console.log(gen.next()); //{value:3,         done:false}
+console.log(gen.next()); //{value:undefined, done:true}
+console.log(gen.next()); // errors as the generator is closed
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Weak Map</h2>
+					<p>The WeakMap object is a collection of key/value pairs in which the keys are objects and the values can be arbitrary values.</p>
+					<br />
+					<ul>
+						<li>WeakMaps are much more efficient for garbage collection.</li>
+						<li>Are not enumerable, you would need to manually keep a list of keys (if that is what you wanted).</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Weak Map</h2>
+					<pre><code data-trim contenteditable javascript>
+WeakMap.prototype.clear();
+WeakMap.prototype.delete(key);
+WeakMap.prototype.get(key);
+WeakMap.prototype.has(key);
+WeakMap.prototype.set(key, value);
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Weak Map</h2>
+					<pre><code data-trim contenteditable javascript>
+var weakMap1 = new WeakMap();
+var test     = {};
+weakMap1.set(test, "hello");
+
+weakMap1.has(test); // true
+weakMap1.get(test); // hello
+weakMap1.get(test2); // undefined
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Proxies</h2>
+<ul>
+    <li>Allow us to intercept operations done on objects</li>
+    <li>We'll cover the most basic, the Get and the Set</li>
+</ul>
+				</section>
+
+				<section>
+					<h2>Proxies</h2>
+					<pre><code data-trim contenteditable javascript>
+let animal = {
+    species:"dog",
+    age:10
+};
+
+let proxyAnimal = new Proxy(animal, {
+    get: function(target, property){
+        console.log(property); //age
+    },
+    set: function(target, property, value){
+        console.log(property); // species
+        console.log(value);    // "cat"
+    }
+});
+
+let myPet           = proxyAnimal.age; // intercepted by the get method
+proxyAnimal.species = 'cat';           // intercepted by the set method
+animal.species;                        // dog
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Proxy Traps list</h2>
+<ul>
+<li>get()</li>
+<li>set()</li>
+<li>deleteProperty()</li>
+<li>enumerate()</li>
+<li>iterate()</li>
+<li>ownKeys()</li>
+<li>has()</li>
+<li>hasOwn()</li>
+<li>defineProperty()</li>
+<li>getPropertyNames()</li>
+<li>getOwnPropertyNames()</li>
+<li>getPropertyDescriptor()</li>
+<li>getOwnPropertyDescriptor()</li>
+<li>fix()</li>
+
+</ul>
+				</section>
+
+
+				<section>
+					<h2>The Set() Object</h2>
+					<p>The Set object lets you store unique values of any type, another option to [] and {}.
+Set objects are collections of values, you can iterate its elements in insertion order. A value in the Set may only occur once; it is unique in the Set's collection.
+					</p>
+
+				</section>
+
+				<section>
+					<h2>The Set() Object</h2>
+					<pre><code data-trim contenteditable javascript>
+let mySet = new Set();
+
+mySet.add(1);
+mySet.add(4);
+mySet.add("hello");
+mySet.size; // 3
+mySet.has("hello"); // true
+mySet.has("world"); // false
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>The Set() Object</h2>
+					<pre><code data-trim contenteditable javascript>
+/* iterable example */
+let mySet = new Set([1,2,6]);
+mySet.size; // 3
+
+mySet.forEach(function(item){
+  console.log(item);
+});
+// 1, 2 ,6
+
+/* or written with a fat function */
+mySet.forEach(item => console.log(item));
+// 1, 2 ,6
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Ecmascript 7</h2>
+					<p>It's only a year away...... so they say.</p>
+				</section>
+
+				<section>
+					<h2>Object.Observe - No more dirty checking</h2>
+					<pre><code data-trim contenteditable javascript>
+var person = {};
+// let's observe this person
+Object.observe(person, function(changes){
+
+    changes.forEach(function(change) {
+
+        // output changes to the person object
+        console.log(change.type, change.name, change.oldValue);
+    });
+
+});
+
+person.name = 'Matt';
+person.age  = 19;
+person.name = 'John';
+					</code></pre>
+				</section>
+
+				<section>
+<img src="images/questions.jpg" border="0">
+				</section>
+
+
+				<section>
+					<h1>THE END</h1>
+					<h2>Questions?</h2>
+					<h3>Further reading: the spec</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
